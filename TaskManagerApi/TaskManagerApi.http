@@ -1,0 +1,45 @@
+@TaskManagerApi_HostAddress = http://localhost:5011
+
+# Get all tasks
+GET {{TaskManagerApi_HostAddress}}/tasks
+Accept: application/json
+
+###
+
+# Get a specific task by ID (replace 1 with an actual ID)
+GET {{TaskManagerApi_HostAddress}}/tasks/1
+Accept: application/json
+
+###
+
+# Create a new task
+POST {{TaskManagerApi_HostAddress}}/tasks
+Content-Type: application/json
+
+{
+    "title": "Sample Task",
+    "description": "Description of the task",
+    "dueDate": "2024-12-31T23:59:59",
+    "status": "Pending"
+}
+
+###
+
+# Update a task by ID
+PUT {{TaskManagerApi_HostAddress}}/tasks/1
+Content-Type: application/json
+
+{
+    "id": 1,
+    "title": "Updated Task",
+    "description": "Updated description",
+    "dueDate": "2025-01-31T23:59:59",
+    "status": "InProgress"
+}
+
+###
+
+# Delete a task by ID
+DELETE {{TaskManagerApi_HostAddress}}/tasks/1
+
+###
