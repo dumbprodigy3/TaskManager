@@ -8,7 +8,7 @@ import { environment } from '../../environments/environment';
   providedIn: 'root'
 })
 export class TaskService {
-  private apiUrl = `${environment.baseUrl}/tasks`; // URL for the backend API
+  private apiUrl = `${environment.baseUrl}/tasks`;
 
   constructor(private http: HttpClient) { }
 

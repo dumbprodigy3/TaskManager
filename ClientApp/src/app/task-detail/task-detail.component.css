@@ -1,0 +1,50 @@
+/* Center the task details card within the page */
+.details-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+/* Style the task details card */
+.details-card {
+  width: 100%;
+  max-width: 500px;
+  padding: 24px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  box-sizing: border-box;
+  border-radius: 8px;
+}
+
+/* Title styling with padding from the edges */
+.details-title {
+  margin-top: 0;
+  padding-bottom: 16px;
+  font-size: 1.5rem;
+  text-align: center;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+/* Styling for task details content */
+.task-details-content {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 16px;
+}
+
+/* Center the edit and back buttons */
+.button-group {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+/* Form field styling for edit mode */
+.edit-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}

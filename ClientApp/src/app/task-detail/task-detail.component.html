@@ -1,11 +1,48 @@
-<div *ngIf="task">
-  <h2>{{ task.title }}</h2>
-  <p><strong>Description:</strong> {{ task.description }}</p>
-  <p><strong>Due Date:</strong> {{ task.dueDate | date }}</p>
-  <p><strong>Status:</strong> {{ statusText }}</p>
-  <a routerLink="/tasks">Back to Task List</a>
-</div>
+<div class="details-container">
+  <mat-card class="details-card">
+    <h2 mat-card-title class="details-title">{{ editMode ? 'Edit Task' : 'Task Details' }}</h2>
 
-<div *ngIf="!task">
-  <p>Loading task details...</p>
+    <mat-card-content *ngIf="!editMode" class="task-details-content">
+      <p><strong>Task title:</strong> {{ task.title }}</p>
+      <p><strong>Description:</strong> {{ task.description }}</p>
+      <p><strong>Due Date:</strong> {{ task.dueDate | date }}</p>
+      <p><strong>Status:</strong> {{ getStatusText(task.status) }}</p>
+    </mat-card-content>
+
+    <div class="button-group" *ngIf="!editMode">
+      <button mat-raised-button color="primary" (click)="toggleEditMode()">Edit</button>
+      <button mat-button routerLink="/tasks">Back to Task List</button>
+    </div>
+
+    <form *ngIf="editMode" (ngSubmit)="updateTask()" class="edit-form">
+      <mat-form-field>
+        <mat-label>Title</mat-label>
+        <input matInput [(ngModel)]="task.title" name="title" required />
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Description</mat-label>
+        <textarea matInput [(ngModel)]="task.description" name="description"></textarea>
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Due Date</mat-label>
+        <input matInput [(ngModel)]="task.dueDate" name="dueDate" type="date" required />
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Status</mat-label>
+        <mat-select [(ngModel)]="task.status" name="status">
+          <mat-option [value]="0">Pending</mat-option>
+          <mat-option [value]="1">In Progress</mat-option>
+          <mat-option [value]="2">Completed</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <div class="button-group">
+        <button mat-raised-button color="primary" type="submit">Save</button>
+        <button mat-button type="button" (click)="cancelEdit()">Cancel</button>
+      </div>
+    </form>
+  </mat-card>
 </div>

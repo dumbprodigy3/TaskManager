@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { TaskService } from '../services/task.service';
-import { Task } from '../models/task.model';
+import { Task, TaskStatus } from '../models/task.model';
+import { TaskUtilsService } from '../services/task-utils.service';
 
 @Component({
   selector: 'app-task-detail',
@@ -9,12 +10,21 @@ import { Task } from '../models/task.model';
   styleUrls: ['./task-detail.component.css']
 })
 export class TaskDetailComponent implements OnInit {
-  task: Task | undefined;
+  task: Task = {
+    id: 0,
+    title: 'Loading task title...',
+    description: 'Loading task description...',
+    dueDate: '',
+    status: TaskStatus.NA
+  };
+  editMode = false;
   statusText: string | undefined;
 
   constructor(
     private route: ActivatedRoute,
-    private taskService: TaskService
+    private taskService: TaskService,
+    private router: Router,
+    private taskUtilsService: TaskUtilsService
   ) { }
 
   ngOnInit(): void {
@@ -26,8 +36,32 @@ export class TaskDetailComponent implements OnInit {
     if (id) {
       this.taskService.getTask(id).subscribe((task) => {
         this.task = task;
-        this.statusText = task.status;
       });
     }
   }
+
+  toggleEditMode(): void {
+    this.editMode = !this.editMode;
+  }
+
+  updateTask(): void {
+    if (this.task && this.task.id !== undefined) {
+      this.taskService.updateTask(this.task.id, this.task).subscribe(() => {
+        this.editMode = false;
+        this.router.navigate(['/tasks']);
+      });
+    } else {
+      console.error('Task ID is undefined. Cannot update task.');
+    }
+  }
+
+  cancelEdit(): void {
+    this.editMode = false;
+    this.getTask(); // Reset to original data
+  }
+
+  getStatusText(status: TaskStatus): string {
+    return this.taskUtilsService.getStatusText(status);
+  }
+
 }
