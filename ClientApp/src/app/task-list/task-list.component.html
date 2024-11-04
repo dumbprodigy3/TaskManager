@@ -1,35 +1,51 @@
 <div class="list-container">
   <mat-card class="list-card">
     <h2 mat-card-title class="list-title">Task List</h2>
-    <table mat-table [dataSource]="tasks" class="mat-elevation-z8 task-table">
-      <!-- Title Column -->
-      <ng-container matColumnDef="title">
-        <th mat-header-cell *matHeaderCellDef> Title </th>
-        <td mat-cell *matCellDef="let task"> {{ task.title }} </td>
-      </ng-container>
 
-      <!-- Status Column -->
-      <ng-container matColumnDef="status">
-        <th mat-header-cell *matHeaderCellDef> Status </th>
-        <td mat-cell *matCellDef="let task"> {{ getStatusText(task.status) }} </td>
-      </ng-container>
-
-      <!-- Actions Column -->
-      <ng-container matColumnDef="actions">
-        <th mat-header-cell *matHeaderCellDef> Actions </th>
-        <td mat-cell *matCellDef="let task">
-          <button mat-button color="primary" [routerLink]="['/tasks', task.id]">View</button>
-          <button mat-button color="accent" [routerLink]="['/tasks/edit', task.id]">Edit</button>
-          <button mat-button color="warn" (click)="deleteTask(task.id!)">Delete</button>
-        </td>
-      </ng-container>
-
-      <tr mat-header-row *matHeaderRowDef="['title', 'status', 'actions']"></tr>
-      <tr mat-row *matRowDef="let row; columns: ['title', 'status', 'actions']"></tr>
-    </table>
-
-    <div class="button-group">
-      <button mat-raised-button color="primary" routerLink="/tasks/create">Add New Task</button>
+    <!-- Loading message -->
+    <div *ngIf="isLoading" class="loading-message">
+      Loading tasks...
     </div>
+
+    <!-- Task table (only shows when tasks are loaded) -->
+    <div *ngIf="!isLoading" class="task-table-container">
+      <table mat-table [dataSource]="tasks" class="task-table">
+        <!-- Title Column -->
+        <ng-container matColumnDef="title">
+          <th mat-header-cell *matHeaderCellDef> Title </th>
+          <td mat-cell *matCellDef="let task"> {{ task.title }} </td>
+        </ng-container>
+
+        <!-- Status Column -->
+        <ng-container matColumnDef="status">
+          <th mat-header-cell *matHeaderCellDef> Status </th>
+          <td mat-cell *matCellDef="let task"> {{ getStatusText(task.status) }} </td>
+        </ng-container>
+
+        <!-- Due Date Column -->
+        <ng-container matColumnDef="dueDate">
+          <th mat-header-cell *matHeaderCellDef> Due Date </th>
+          <td mat-cell *matCellDef="let task"> {{ task.dueDate | date:'MM/dd/yyyy' }} </td>
+        </ng-container>
+
+        <!-- Actions Column -->
+        <ng-container matColumnDef="actions">
+          <th mat-header-cell *matHeaderCellDef> Actions </th>
+          <td mat-cell *matCellDef="let task">
+            <button mat-button color="primary" [routerLink]="['/tasks', task.id]">View</button>
+            <button mat-button color="accent" [routerLink]="['/tasks/edit', task.id]">Edit</button>
+            <button mat-button color="warn" (click)="deleteTask(task.id!)">Delete</button>
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="['title', 'status', 'dueDate', 'actions']"></tr>
+        <tr mat-row *matRowDef="let row; columns: ['title', 'status', 'dueDate', 'actions']"></tr>
+      </table>
+    </div>
+
+      <!-- Add task button (only shows when tasks are loaded) -->
+      <div *ngIf="!isLoading" class="button-group">
+        <button mat-raised-button color="primary" routerLink="/tasks/create">Add New Task</button>
+      </div>
   </mat-card>
 </div>

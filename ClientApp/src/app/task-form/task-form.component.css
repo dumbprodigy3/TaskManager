@@ -1,42 +1,50 @@
-/* Center the form card within the page and add outer margin */
 .form-container {
   display: flex;
   justify-content: center;
   align-items: center;
   min-height: 100vh;
-  padding: 20px; /* Adds padding around the form container */
+  padding: 20px;
   box-sizing: border-box;
 }
 
-/* Style the form card with padding, max width, and center alignment */
 .form-card {
   width: 100%;
-  max-width: 500px; /* Restricts card width to 500px for a centered appearance */
-  padding: 24px; /* Adds padding inside the card for spacing */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Shadow for depth */
+  max-width: 500px;
+  padding: 24px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   box-sizing: border-box;
-  border-radius: 8px; /* Rounded corners for better aesthetics */
+  border-radius: 8px;
 }
 
-/* Title styling with padding from the edges */
+.error-message {
+  color: red;
+  font-weight: bold;
+  margin-top: 16px;
+}
+
 .title {
   margin-top: 0;
   padding-bottom: 16px;
   font-size: 1.5rem;
   text-align: center;
-  border-bottom: 1px solid #e0e0e0; /* Optional divider for emphasis */
+  border-bottom: 1px solid #e0e0e0;
 }
 
-/* Stack form fields vertically with space in between */
 .task-form {
   display: flex;
   flex-direction: column;
-  gap: 16px; /* Space between form fields */
+  gap: 16px;
+  width: 100%;
 }
 
-/* Center the submit button */
+.mat-form-field {
+  width: 100%;
+  display: block;
+}
+
 .button-group {
   display: flex;
   justify-content: center;
+  gap: 16px;
   margin-top: 20px;
 }

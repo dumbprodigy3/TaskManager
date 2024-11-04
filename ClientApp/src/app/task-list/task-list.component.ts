@@ -10,6 +10,7 @@ import { TaskUtilsService } from '../services/task-utils.service';
 })
 export class TaskListComponent implements OnInit {
   tasks: Task[] = [];
+  isLoading = true;
 
   constructor(
     private taskService: TaskService,
@@ -18,6 +19,7 @@ export class TaskListComponent implements OnInit {
   ngOnInit(): void {
     this.taskService.getTasks().subscribe(tasks => {
       this.tasks = tasks;
+      this.isLoading = false;
     });
   }
 
