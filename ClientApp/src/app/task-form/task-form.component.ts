@@ -11,6 +11,11 @@ import { of } from 'rxjs';
   templateUrl: './task-form.component.html',
   styleUrls: ['./task-form.component.css']
 })
+
+/**
+ * Component to edit or create a new task.
+ * 
+ */
 export class TaskFormComponent implements OnInit {
   taskForm: FormGroup;
   errorMessage: string | null = null;
@@ -46,6 +51,7 @@ export class TaskFormComponent implements OnInit {
     }
   }
 
+  // Create or update the task based on if id is already present or not.
   saveTask(): void {
     if (this.taskForm.invalid) {
       this.errorMessage = 'Please correct the errors and try again.';

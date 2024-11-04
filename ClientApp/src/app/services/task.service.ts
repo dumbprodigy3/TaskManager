@@ -7,6 +7,10 @@ import { environment } from '../../environments/environment';
 @Injectable({
   providedIn: 'root'
 })
+
+/**
+ * Service interface to the backend.
+ */
 export class TaskService {
   private apiUrl = `${environment.baseUrl}/tasks`;
 

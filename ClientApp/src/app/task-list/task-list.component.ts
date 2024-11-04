@@ -8,6 +8,11 @@ import { TaskUtilsService } from '../services/task-utils.service';
   templateUrl: './task-list.component.html',
   styleUrls: ['./task-list.component.css']
 })
+
+/**
+ * Component to display the list of all tasks.
+ * 
+ */
 export class TaskListComponent implements OnInit {
   tasks: Task[] = [];
   isLoading = true;

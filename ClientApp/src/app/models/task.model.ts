@@ -1,3 +1,4 @@
+// Task interface to match the backend data.
 export interface Task {
   id?: number;
   title: string;

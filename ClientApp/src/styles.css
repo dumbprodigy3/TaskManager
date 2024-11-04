@@ -1,6 +1,3 @@
-/* src/styles.css */
-
-/* Set a steel blue background color for the entire app */
 body, html {
   margin: 0;
   padding: 0;
@@ -9,7 +6,6 @@ body, html {
   font-family: Roboto, "Helvetica Neue", sans-serif;
 }
 
-/* Optional: Center and style the main Angular app container */
 #app-root {
   display: flex;
   justify-content: center;

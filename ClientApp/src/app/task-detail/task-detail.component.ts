@@ -9,7 +9,13 @@ import { TaskUtilsService } from '../services/task-utils.service';
   templateUrl: './task-detail.component.html',
   styleUrls: ['./task-detail.component.css']
 })
+
+/**
+ * Component to display the task details of individual tasks.
+ * 
+ */
 export class TaskDetailComponent implements OnInit {
+  // Initialize task with values to be displayed while loading data.
   task: Task = {
     id: 0,
     title: 'Loading task title...',
@@ -31,6 +37,7 @@ export class TaskDetailComponent implements OnInit {
     this.getTask();
   }
 
+  // Get the current values for the fields.
   getTask(): void {
     const id = Number(this.route.snapshot.paramMap.get('id'));
     if (id) {
@@ -44,6 +51,7 @@ export class TaskDetailComponent implements OnInit {
     this.editMode = !this.editMode;
   }
 
+  // Update the task.
   updateTask(): void {
     if (this.task && this.task.id !== undefined) {
       this.taskService.updateTask(this.task.id, this.task).subscribe(() => {
