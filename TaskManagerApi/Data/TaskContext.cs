@@ -1,5 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Task = TaskManagerApi.Models.Task;
+using TaskManagerApi.Models;
 
 namespace TaskManagerApi.Data
 {
@@ -7,6 +7,6 @@ namespace TaskManagerApi.Data
     {
         public TaskContext(DbContextOptions<TaskContext> options) : base(options) { }
 
-        public DbSet<Task> Tasks { get; set; }
+        public DbSet<ToDoTask> Tasks { get; set; }
     }
 }

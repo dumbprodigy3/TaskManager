@@ -1,6 +1,6 @@
 ﻿namespace TaskManagerApi.Models
 {
-    public class Task
+    public class ToDoTask
     {
         public int Id { get; set; }
         public string Title { get; set; }

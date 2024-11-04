@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using TaskManagerApi.Data;
-using Task = TaskManagerApi.Models.Task;
+using TaskManagerApi.Models;
 
 namespace TaskManagerApi.Controllers
 {
@@ -23,14 +23,14 @@ namespace TaskManagerApi.Controllers
 
         // GET: /tasks
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Task>>> GetTasks()
+        public async Task<ActionResult<IEnumerable<ToDoTask>>> GetTasks()
         {
             return await _context.Tasks.ToListAsync();
         }
 
         // GET: /tasks/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Task>> GetTask(int id)
+        public async Task<ActionResult<ToDoTask>> GetTask(int id)
         {
             var task = await _context.Tasks.FindAsync(id);
 
@@ -45,7 +45,7 @@ namespace TaskManagerApi.Controllers
         // PUT:/tasks/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutTask(int id, Task task)
+        public async Task<IActionResult> PutTask(int id, ToDoTask task)
         {
             if (id != task.Id)
             {
@@ -76,8 +76,18 @@ namespace TaskManagerApi.Controllers
         // POST: /tasks
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Task>> PostTask(Task task)
+        public async Task<ActionResult<ToDoTask>> PostTask(ToDoTask task)
         {
+            if (!ModelState.IsValid)
+            {
+                // Log validation errors
+                foreach (var error in ModelState.Values.SelectMany(v => v.Errors))
+                {
+                    Console.WriteLine(error.ErrorMessage);
+                }
+                return BadRequest(ModelState);
+            }
+
             _context.Tasks.Add(task);
             await _context.SaveChangesAsync();
 

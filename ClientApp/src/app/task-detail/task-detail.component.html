@@ -1,0 +1,11 @@
+<div *ngIf="task">
+  <h2>{{ task.title }}</h2>
+  <p><strong>Description:</strong> {{ task.description }}</p>
+  <p><strong>Due Date:</strong> {{ task.dueDate | date }}</p>
+  <p><strong>Status:</strong> {{ statusText }}</p>
+  <a routerLink="/tasks">Back to Task List</a>
+</div>
+
+<div *ngIf="!task">
+  <p>Loading task details...</p>
+</div>
